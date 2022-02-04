@@ -1,16 +1,54 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
+    <link rel="stylesheet" href="style.css" />
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Buzzer</title>
+    <script
+      src="https://cdn.socket.io/4.4.1/socket.io.min.js"
+      integrity="sha384-fKnu0iswBIqkjxrhQCTZ7qlLHOFEgNkRmK2vaO/LbTZSXdJfAu6ewRBdwHPhBo/H"
+      crossorigin="anonymous"
+    ></script>
   </head>
   <body>
-    <div class="message_container">
-      <div class="input-div">
-        <input type="text" id="name_input" />
-      </div>
+    <div id="message_container"></div>
+
+    <div class="input-div">
+      <input type="text" id="name_input" placeholder="Namn" />
+      <input type="text" id="message_input" placeholder="Meddelande" />
+      <button id="send_button">Skicka</button>
     </div>
+    <script>
+      const messageContainer = document.getElementById("message_container");
+      const nameInput = document.getElementById("name_input");
+      const messageInput = document.getElementById("message_input");
+      const sendButton = document.getElementById("send_button");
+      const socket = io.connect("http://localhost:5000");
+
+      socket.on("connect", () => console.log("it works"));
+
+      sendButton.addEventListener("click", () => {
+        let message;
+        if (nameInput.value === "") {
+          message = messageInput.value;
+        } else {
+          message = `${nameInput.value}: ${messageInput.value}`;
+        }
+
+        if (messageInput === "") {
+          return;
+        }
+        displayMessage(`You: ${messageInput.value}`);
+      });
+
+      const displayMessage = (message) => {
+        const div = document.createElement("div");
+        div.id = "message_div";
+        div.innerHTML = message;
+        messageContainer.append(div);
+      };
+    </script>
   </body>
 </html>
