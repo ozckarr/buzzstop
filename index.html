@@ -25,9 +25,10 @@
       const nameInput = document.getElementById("name_input");
       const messageInput = document.getElementById("message_input");
       const sendButton = document.getElementById("send_button");
-      const socket = io.connect("http://localhost:5000");
+      const socket = io.connect("https://buzzstop.herokuapp.com/");
 
-      socket.on("connect", () => console.log("it works"));
+      socket.on("connect", () => console.log("conected"));
+      socket.on("receive-message", (message) => displayMessage(message));
 
       sendButton.addEventListener("click", () => {
         let message;
@@ -41,6 +42,9 @@
           return;
         }
         displayMessage(`You: ${messageInput.value}`);
+
+        socket.emit("send-message", message);
+        messageInput.value = "";
       });
 
       const displayMessage = (message) => {
