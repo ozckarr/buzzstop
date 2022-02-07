@@ -16,43 +16,40 @@
     <div id="message_container"></div>
 
     <div class="input-div">
-      <input type="text" id="name_input" placeholder="Namn" />
-      <input type="text" id="message_input" placeholder="Meddelande" />
+      <input
+        type="text"
+        id="name_input"
+        class="input_field"
+        placeholder="Namn"
+      />
+      <input
+        type="text"
+        id="message_input"
+        class="input_field"
+        placeholder="Meddelande"
+      />
       <button id="send_button">Skicka</button>
+
+      <div>
+        <input
+          type="radio"
+          id="sound_zap"
+          name="picked_sound"
+          value="Zap"
+          checked
+        />
+        <label for="sound_zap">Zap</label>
+        <input
+          type="radio"
+          id="sound_plopp"
+          name="picked_sound"
+          value="plopp"
+        />
+        <label for="sound_plopp">Plopp</label>
+        <input type="radio" id="sound_buzz" name="picked_sound" value="Buzz" />
+        <label for="sound_buzz">Buzz</label>
+      </div>
+      <script src="script.js"></script>
     </div>
-    <script>
-      const messageContainer = document.getElementById("message_container");
-      const nameInput = document.getElementById("name_input");
-      const messageInput = document.getElementById("message_input");
-      const sendButton = document.getElementById("send_button");
-      const socket = io.connect("https://buzzstop.herokuapp.com/");
-
-      socket.on("connect", () => console.log("conected"));
-      socket.on("receive-message", (message) => displayMessage(message));
-
-      sendButton.addEventListener("click", () => {
-        let message;
-        if (nameInput.value === "") {
-          message = messageInput.value;
-        } else {
-          message = `${nameInput.value}: ${messageInput.value}`;
-        }
-
-        if (messageInput === "") {
-          return;
-        }
-        displayMessage(`You: ${messageInput.value}`);
-
-        socket.emit("send-message", message);
-        messageInput.value = "";
-      });
-
-      const displayMessage = (message) => {
-        const div = document.createElement("div");
-        div.id = "message_div";
-        div.innerHTML = message;
-        messageContainer.append(div);
-      };
-    </script>
   </body>
 </html>

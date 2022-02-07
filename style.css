@@ -9,6 +9,7 @@ body {
   height: 400px;
   border: 2px solid black;
   border-radius: 5px;
+  overflow: scroll;
 }
 
 #message_container div:nth-last-child(odd) {
@@ -33,7 +34,7 @@ body {
   width: 90%;
 }
 
-input {
+.input_field {
   width: 75%;
   margin: 0 0 10px 0;
   border: 2px solid black;
