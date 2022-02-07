@@ -13,43 +13,107 @@
     ></script>
   </head>
   <body>
-    <div id="message_container"></div>
-
-    <div class="input-div">
-      <input
-        type="text"
-        id="name_input"
-        class="input_field"
-        placeholder="Namn"
-      />
-      <input
-        type="text"
-        id="message_input"
-        class="input_field"
-        placeholder="Meddelande"
-      />
-      <button id="send_button">Skicka</button>
-
-      <div>
-        <input
-          type="radio"
-          id="sound_zap"
-          name="picked_sound"
-          value="Zap"
-          checked
-        />
-        <label for="sound_zap">Zap</label>
-        <input
-          type="radio"
-          id="sound_plopp"
-          name="picked_sound"
-          value="plopp"
-        />
-        <label for="sound_plopp">Plopp</label>
-        <input type="radio" id="sound_buzz" name="picked_sound" value="Buzz" />
-        <label for="sound_buzz">Buzz</label>
+    <div id="main-container">
+      <div id="message_container"></div>
+      <div id="button-container">
+        <button id="send_button"></button>
+        <div id="white-button-gradient"></div>
+        <h1>Tryck</h1>
       </div>
-      <script src="script.js"></script>
+
+      <div class="input-div">
+        <input
+          type="text"
+          id="name_input"
+          class="input_field"
+          placeholder="Namn"
+        />
+
+        <div id="sound-container">
+          <label for="sound_zap"
+            ><input
+              type="radio"
+              id="sound_zap"
+              name="picked_sound"
+              value="Zap"
+              checked
+            />
+            Zap</label
+          >
+          <label for="sound_plopp">
+            <input
+              type="radio"
+              id="sound_plopp"
+              name="picked_sound"
+              value="plopp"
+            />
+            Plopp</label
+          >
+          <label for="sound_buzz">
+            <input
+              type="radio"
+              id="sound_buzz"
+              name="picked_sound"
+              value="buzz"
+            />
+            Buzz</label
+          >
+          <label for="sound_clang">
+            <input
+              type="radio"
+              id="sound_clang"
+              name="picked_sound"
+              value="clang"
+            />
+            Klang</label
+          >
+          <label for="sound_gooble">
+            <input
+              type="radio"
+              id="sound_gooble"
+              name="picked_sound"
+              value="gooble"
+            />
+            Gooble</label
+          >
+          <label for="sound_honk">
+            <input
+              type="radio"
+              id="sound_honk"
+              name="picked_sound"
+              value="honk"
+            />
+            Honk</label
+          >
+          <label for="sound_moo">
+            <input
+              type="radio"
+              id="sound_moo"
+              name="picked_sound"
+              value="moo"
+            />
+            Mu</label
+          >
+          <label for="sound_ping">
+            <input
+              type="radio"
+              id="sound_ping"
+              name="picked_sound"
+              value="ping"
+            />
+            Ping</label
+          >
+        </div>
+        <div id="color-container">
+          <input
+            type="color"
+            id="player_color"
+            name="player-color"
+            value="#f6b73c"
+          />
+        </div>
+        <script type="module" src="script.js"></script>
+      </div>
     </div>
   </body>
 </html>
