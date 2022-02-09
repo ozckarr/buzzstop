@@ -23,8 +23,8 @@ body {
   border-radius: 5px;
   overflow: scroll;
   margin: 10px 0;
-  display: flex;
-  flex-direction: column-reverse;
+  /*display: flex;*/
+  /*flex-direction: column-reverse;*/
 }
 
 #message_container {

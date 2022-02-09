@@ -3,25 +3,21 @@ const socket = io.connect("https://buzzstop.herokuapp.com/");
 const sendButton = document.getElementById("send_button");
 const clearButton = document.getElementById("clear_button");
 const playerColor = document.getElementById("player_color");
+const messageContainer = document.getElementById("message_container");
 
 window.addEventListener("load", () => {
   init();
 });
 
 const init = () => {
-  randomizeColor();
   // Socket setup
   socket.on("connect", () => console.log("connected"));
   socket.on("receive-message", (message) => handleMessage(message));
 
+  randomizeColor();
   sendButton.addEventListener("click", sendMsg);
   clearButton.addEventListener("click", clearBtn);
-};
-
-const randomizeColor = () => {
-  let randomColor = "#" + Math.floor(Math.random() * 16777215).toString(16);
-  playerColor.value = randomColor;
-  document.getElementById("send_button").style.backgroundColor = randomColor;
+  playerColor.addEventListener("change", starterColor);
 };
 
 // Send message
@@ -56,7 +52,6 @@ const clearBtn = () => {
 };
 
 const clearMessages = () => {
-  const messageContainer = document.getElementById("message_container");
   messageContainer.innerHTML = "";
 };
 
@@ -70,18 +65,38 @@ const handleMessage = (message) => {
 
 // Display buzzes
 const displayMessage = (message) => {
-  const messageContainer = document.getElementById("message_container");
   const div = document.createElement("div");
-  div.setAttribute("style", `background-color:${message.playerColor};`);
+  div.setAttribute("style", `background-color:${message.playerColor}`);
   div.setAttribute("class", "message_div");
+  div.setAttribute("id", `${message.time};`);
 
   new Audio(`./Audio/${message.selectedSound}.mp3`).play();
   div.innerHTML = message.name;
   messageContainer.append(div);
+
+  reorderBuzzes();
 };
 
-// Color
-playerColor.addEventListener("change", () => {
+const reorderBuzzes = () => {
+  [].map
+    .call(messageContainer.children, Object)
+    .sort(function (a, b) {
+      return +a.id.match(/\d+/) - +b.id.match(/\d+/);
+    })
+    .forEach(function (elem) {
+      messageContainer.appendChild(elem);
+    });
+};
+
+// Starter Color
+
+const randomizeColor = () => {
+  let randomColor = "#" + Math.floor(Math.random() * 16777215).toString(16);
+  playerColor.value = randomColor;
+  sendButton.style.backgroundColor = randomColor;
+};
+
+const starterColor = () => {
   const newColor = playerColor.value;
-  document.getElementById("send_button").style.backgroundColor = newColor;
-});
+  sendButton.style.backgroundColor = newColor;
+};
