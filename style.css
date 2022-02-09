@@ -23,6 +23,8 @@ body {
   border-radius: 5px;
   overflow: scroll;
   margin: 10px 0;
+  display: flex;
+  flex-direction: column-reverse;
 }
 
 #message_container {
@@ -31,6 +33,20 @@ body {
 
 #message_container div:nth-last-child(odd) {
   background-color: #eee;
+}
+
+#clear_button {
+  position: absolute;
+  top: 10px;
+  border: 2px black solid;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+#clear_button img {
+  height: 1.5em;
+  width: 1.5em;
+  border-radius: 3px;
 }
 
 .message_div {
@@ -42,6 +58,9 @@ body {
   border-radius: 5px;
   margin: 2px;
   -webkit-text-stroke: 0.5px white;
+  white-space: nowrap;
+
+  padding: 0 1em;
 }
 
 .input_field {
@@ -108,4 +127,5 @@ body {
   flex-wrap: wrap;
   justify-content: center;
   width: 100%;
+  padding: 10px 0;
 }
